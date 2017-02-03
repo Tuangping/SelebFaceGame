@@ -26,6 +26,7 @@ int videoFrame;
 int i;
 //info Array
 float[][] info;
+Table infoTable;
 
 void setup(){
   noStroke();
@@ -55,7 +56,20 @@ void setup(){
   oscP5.plug(this, "posePosition", "/pose/position");
   oscP5.plug(this, "poseScale", "/pose/scale");
   oscP5.plug(this, "poseOrientation", "/pose/orientation");
-   info = new float[111][10];
+   //info = new float[111][10];
+   infoTable = new Table();
+   infoTable.addColumn("frameCount");
+   infoTable.addColumn("LBrowH");
+   infoTable.addColumn("RBrowH");
+   infoTable.addColumn("LEyeH");
+   infoTable.addColumn("REyeH");
+   infoTable.addColumn("nose");
+   infoTable.addColumn("MouseH");
+   infoTable.addColumn("MouseW");
+   infoTable.addColumn("OriX");
+   infoTable.addColumn("OriY");
+   infoTable.addColumn("OriZ");
+   //saveTable(infoTable, "table.csv");
 }
 
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -64,7 +78,7 @@ void draw(){
  //frameCount = programFrame;
  if (eyeLeftHeight != 0.0){
     reportFrame();
-    info[frameCount][0]= leftEyebrowHeight;
+    /*info[frameCount][0]= leftEyebrowHeight;
     info[frameCount][1]= rightEyebrowHeight;
     info[frameCount][2]= eyeLeftHeight;
     info[frameCount][3]= eyeRightHeight;
@@ -73,15 +87,29 @@ void draw(){
     info[frameCount][6]= mouthWidth;
     info[frameCount][7]= poseOrt_x;
     info[frameCount][8]= poseOrt_y;
-    info[frameCount][9]= poseOrt_z;
-
+    info[frameCount][9]= poseOrt_z;*/
+    TableRow newRow = infoTable.addRow();
+    newRow.setInt("frameCount", infoTable.lastRowIndex());
+    newRow.setFloat("LBrowH", leftEyebrowHeight);
+    newRow.setFloat("RBrowH", rightEyebrowHeight);
+    newRow.setFloat("LEyeH", eyeLeftHeight);
+    newRow.setFloat("REyeH", eyeRightHeight);
+    newRow.setFloat("nose", nostrilHeight);
+    newRow.setFloat("MouseH", mouthHeight);
+    newRow.setFloat("MouseW", mouthWidth);
+    newRow.setFloat("OriX", poseOrt_x);
+    newRow.setFloat("OriY", poseOrt_y);
+    newRow.setFloat("OriZ", poseOrt_z);
+    
+   //saveTable(infoTable, "table.csv");
  } else {
    frameCount =0;
  }
- exportFiles();
- println("///////////////////////////////////////////FC in draw: "+frameCount );
- //println();
- printArray(info[frameCount]);
+ //exportFiles();///saveStringfile
+
+ println("FC in draw: "+frameCount);
+ saveTable(infoTable, "table.csv");//,"html");
+ //println(saveTable(infoTable, "table.csv"));
  
 }
 
@@ -89,7 +117,7 @@ void draw(){
 void reportFrame(){
   
 }
-void exportFiles(){
+/*void exportFiles(){
   String[] lines0 = new String[10];
   String[] lines1 = new String[10];
   for(int i = 0;i<111;i++)
@@ -103,4 +131,4 @@ void exportFiles(){
     saveStrings("Data.txt",lines1);
   }
   
-}
+}*/
