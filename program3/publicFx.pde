@@ -58,6 +58,6 @@ void oscEvent(OscMessage theOscMessage) {
   plugged = theOscMessage.isPlugged();
   if (theOscMessage.isPlugged()==false) {
     //println("UNPLUGGED: " + theOscMessage);
-    println("FC when Osc on: "+frameCount);
+    //println("FC when Osc on: "+frameCount);
   }
 }

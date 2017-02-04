@@ -78,17 +78,17 @@ void draw(){
  if (eyeLeftHeight != 0.0&& plugged){
     reportFrame();
     TableRow newRow = infoTable.addRow();
-    newRow.setInt("frameCount", infoTable.lastRowIndex());
-    newRow.setFloat("LBrowH", leftEyebrowHeight);
-    newRow.setFloat("RBrowH", rightEyebrowHeight);
-    newRow.setFloat("LEyeH", eyeLeftHeight);
-    newRow.setFloat("REyeH", eyeRightHeight);
-    newRow.setFloat("nose", nostrilHeight);
-    newRow.setFloat("MouseH", mouthHeight);
-    newRow.setFloat("MouseW", mouthWidth);
-    newRow.setFloat("OriX", poseOrt_x);
-    newRow.setFloat("OriY", poseOrt_y);
-    newRow.setFloat("OriZ", poseOrt_z);
+    newRow.setInt("frameCount", frameCount);//infoTable.lastRowIndex());
+    newRow.setFloat("LBrowH", Math.round(leftEyebrowHeight*100)/100.0);
+    newRow.setFloat("RBrowH", Math.round(rightEyebrowHeight*100)/100.0);
+    newRow.setFloat("LEyeH", Math.round(eyeLeftHeight*100)/100.0);
+    newRow.setFloat("REyeH", Math.round(eyeRightHeight*100)/100.0);
+    newRow.setFloat("nose", Math.round(nostrilHeight*100)/100.0);
+    newRow.setFloat("MouseH", Math.round(mouthHeight*100)/100.0);
+    newRow.setFloat("MouseW", Math.round(mouthWidth*100)/100.0);
+    newRow.setFloat("OriX", Math.round(poseOrt_x*100)/100.0);
+    newRow.setFloat("OriY", Math.round(poseOrt_y*1000)/1000.0);
+    newRow.setFloat("OriZ", Math.round(poseOrt_z*100)/100.0);
     
    //saveTable(infoTable, "table.csv");
  } else {
