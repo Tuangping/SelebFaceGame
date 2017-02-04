@@ -27,7 +27,11 @@ int i;
 //info Array
 float[][] info;
 Table infoTable;
-
+//reference values
+Table referTable;
+int NKframe;
+float NKBrowL,NKBrowR,NKEyeL,NKEyeR,NKNose,NKMouthH,NKMouthW,NKOriX,NKOriY,NKOriZ;
+    
 void setup(){
   noStroke();
   smooth();
@@ -69,6 +73,7 @@ void setup(){
    infoTable.addColumn("OriY");
    infoTable.addColumn("OriZ");
    //saveTable(infoTable, "table.csv");
+   loadReferTable();
 }
 
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -76,7 +81,7 @@ void setup(){
 void draw(){
  //frameCount = programFrame;
  if (eyeLeftHeight != 0.0&& plugged){
-    reportFrame();
+    //reportFrame();
     TableRow newRow = infoTable.addRow();
     newRow.setInt("frameCount", frameCount);//infoTable.lastRowIndex());
     newRow.setFloat("LBrowH", Math.round(leftEyebrowHeight*100)/100.0);
@@ -96,12 +101,32 @@ void draw(){
  }
  //exportFiles();///saveStringfile
 
- println("FC in draw: "+frameCount);
+ //println("FC in draw: "+frameCount);
  saveTable(infoTable, "table.csv");//,"html");
  
 }
 
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-void reportFrame(){
+void loadReferTable(){
+  referTable = loadTable("NikkiVideoData.csv","header");
+  println(referTable.getRowCount() + "total rows in table");
+  for(TableRow row : referTable.rows()){
+    NKframe = row.getInt("frameCount");
+    NKBrowL = row.getFloat("LBrowH");
+    NKBrowR = row.getFloat("RBrowH");
+    NKEyeL = row.getFloat("LEyeH");
+    NKEyeR = row.getFloat("REyeH");
+    NKNose = row.getFloat("nose");
+    NKMouthH = row.getFloat("MouseH");
+    NKMouthW = row.getFloat("MouseW");
+    NKOriX = row.getFloat("OriX");
+    NKOriY = row.getFloat("OriY");
+    NKOriZ = row.getFloat("OriZ");
+    
+    println(NKframe + "[" + NKBrowL +" | "+NKBrowR+" | "
+    +NKEyeL+" | "+NKEyeR+" | "
+    +NKNose+" | "+NKMouthH+" | "+NKMouthW+" | "
+    +NKOriX+" | "+NKOriY+" | "+NKOriZ);
+  }
   
 }
