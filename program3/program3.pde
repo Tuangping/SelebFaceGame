@@ -56,7 +56,6 @@ void setup(){
   oscP5.plug(this, "posePosition", "/pose/position");
   oscP5.plug(this, "poseScale", "/pose/scale");
   oscP5.plug(this, "poseOrientation", "/pose/orientation");
-   //info = new float[111][10];
    infoTable = new Table();
    infoTable.addColumn("frameCount");
    infoTable.addColumn("LBrowH");
@@ -76,18 +75,8 @@ void setup(){
 
 void draw(){
  //frameCount = programFrame;
- if (eyeLeftHeight != 0.0){
+ if (eyeLeftHeight != 0.0&& plugged){
     reportFrame();
-    /*info[frameCount][0]= leftEyebrowHeight;
-    info[frameCount][1]= rightEyebrowHeight;
-    info[frameCount][2]= eyeLeftHeight;
-    info[frameCount][3]= eyeRightHeight;
-    info[frameCount][4]= nostrilHeight;
-    info[frameCount][5]= mouthHeight;
-    info[frameCount][6]= mouthWidth;
-    info[frameCount][7]= poseOrt_x;
-    info[frameCount][8]= poseOrt_y;
-    info[frameCount][9]= poseOrt_z;*/
     TableRow newRow = infoTable.addRow();
     newRow.setInt("frameCount", infoTable.lastRowIndex());
     newRow.setFloat("LBrowH", leftEyebrowHeight);
@@ -109,7 +98,6 @@ void draw(){
 
  println("FC in draw: "+frameCount);
  saveTable(infoTable, "table.csv");//,"html");
- //println(saveTable(infoTable, "table.csv"));
  
 }
 
@@ -117,18 +105,3 @@ void draw(){
 void reportFrame(){
   
 }
-/*void exportFiles(){
-  String[] lines0 = new String[10];
-  String[] lines1 = new String[10];
-  for(int i = 0;i<111;i++)
-  {
-    for(int j = 0;j<10;j++)
-    {  
-      lines0[j] = info[i][j]+",";
-      
-    }
-    lines1[i] = lines0 + "/n";
-    saveStrings("Data.txt",lines1);
-  }
-  
-}*/
