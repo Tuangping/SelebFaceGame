@@ -41,7 +41,8 @@ float NKBrowL,NKBrowR,NKEyeL,NKEyeR,NKNose,NKMouthH,NKMouthW,NKOriX,NKOriY,NKOri
 int w = 1280;
 int h = 920;
 int score =0;
-int area =1; //threshold
+String scoreString="";
+//int area =1; //threshold
 void settings(){
   size(w,h,P3D);
 }
@@ -81,6 +82,7 @@ void setup(){
    //saveTable(infoTable, "table.csv");
    //loadReferTable();
   referTable = loadTable("NikkiVideoData.csv","header");
+  canvas = createGraphics(w,h,P3D);
   frameRate(30);
 }
 
@@ -90,10 +92,17 @@ void draw(){
   if(cam.available() ==true){
      cam.read(); 
    }
+   pushMatrix();
+   translate(canvas.width,0);
+   scale(-1,1);
+   canvas.beginDraw();
+   
    image(cam,0,0);
+   canvas.endDraw();
+   popMatrix();
    //loadReferTable();
  //frameCount = programFrame;
- if (eyeLeftHeight != 0.0&& plugged){
+   if (eyeLeftHeight != 0.0&& plugged){
     //reportFrame();
     TableRow newRow = infoTable.addRow();
     newRow.setInt("frameCount", frameCount);//infoTable.lastRowIndex());
@@ -121,7 +130,7 @@ void draw(){
       NKOriY = row.getFloat("OriY");
       NKOriZ = row.getFloat("OriZ");
     }
-    //println("CSV : "+NKBrowL +" WEBCAM : "+leftEyebrowHeight);
+    println("///////////////////////////////CSV : "+NKBrowL +"  WEBCAM : "+leftEyebrowHeight + "  SCORE : "+score);
     if(NKBrowL-area <leftEyebrowHeight && NKBrowL+area >leftEyebrowHeight){
       score++;
     }if (NKBrowR-area<rightEyebrowHeight && NKBrowR+area >rightEyebrowHeight){
@@ -143,8 +152,12 @@ void draw(){
     }if(NKOriZ-area<poseOrt_z && NKOriZ+area>poseOrt_z){
       score++;
     }
+    textSize(60);
+    text(score+"\n"+scoreString,30,100);
    if(frameCount >=90){
      Score();
+     frameCount =0;
+     score = 0;
    }
  } else {
    frameCount =0;
@@ -154,13 +167,14 @@ void draw(){
  //exportFiles();///saveStringfile
 
  //println("FC in draw: "+frameCount);
- println("FRAMECOUNT : "+frameCount+"    SCORE : "+score);
+ //println("FRAMECOUNT : "+frameCount+"    SCORE : "+score);
  saveTable(infoTable, "table.csv");//,"html");
 }
 
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
-
+float area =0.2; //threshold
+float ori = 0.01;
 void loadReferTable(){
   //referTable = loadTable("NikkiVideoData.csv","header");
   //println(referTable.getRowCount() + "total rows in table");
@@ -191,11 +205,11 @@ void loadReferTable(){
       score++;
     }if (NKMouthW-area< mouthWidth && NKMouthW+area> mouthWidth){
       score++;
-    }if(NKOriX-area<poseOrt_x && NKOriX+area>poseOrt_x){
+    }if(NKOriX-ori<poseOrt_x && NKOriX+ori>poseOrt_x){
       score++;
-    }if(NKOriY-area<poseOrt_y && NKOriY+area>poseOrt_y){
+    }if(NKOriY-ori<poseOrt_y && NKOriY+ori>poseOrt_y){
       score++;
-    }if(NKOriZ-area<poseOrt_z && NKOriZ+area>poseOrt_z){
+    }if(NKOriZ-ori<poseOrt_z && NKOriZ+ori>poseOrt_z){
       score++;
     }
   }
@@ -205,15 +219,25 @@ void loadReferTable(){
 /*void dataComparsion(Table table){
 }*/
 void Score(){
-  if (score < 40){
-    println("You are such a mundane person.");
-  } else if (score>=40 && score<=80){
-    println("Your acting is ok but still too boring.");
-  } else if ( score>80 & score <=120){
-    println("You are kidda fancy person.");
-  } else if ( score>120 & score <=180){
-    println("Ahrr.. May be you can be a star one day.");
-  }else if ( score>180 ){
-    println("Yeah... you do good. Ready for a celeb life?");
+  if (score < 300){
+    //text(score+"You are such a mundane person.",100,150);
+    //text();
+    scoreString = "You are such a mundane person.";
+  } else if (score>=300 && score<=450){
+    println(score+"Your acting is ok but still too boring.");
+    //text(score+"Your acting is ok but still too boring.",100,150);
+    scoreString = "Your acting is ok but still too boring.";
+  } else if ( score>450 & score <=650){
+    println(score+"You are kidda fancy person.");
+    scoreString = "You are kidda fancy person.";
+    //text(score+"You are kidda fancy person.",100,150);
+  } else if ( score>650 & score <=800){
+    println(score+"Ahrr.. May be you can be a star one day.");
+    scoreString = "Ahrr.. May be you can be a star one day.";
+    //text(score+"Ahrr.. May be you can be a star one day.",100,150);
+  }else if ( score>800 ){
+    println(score+"Yeah... you do good. Ready for a celeb life?");
+    scoreString = "Yeah... you do good. Ready for a celeb life?";
+    //text(score+"Yeah... you do good. Ready for a celeb life?",100,150);
   }
 }
