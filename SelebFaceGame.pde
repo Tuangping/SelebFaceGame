@@ -1,47 +1,38 @@
 import oscP5.*;
-OscP5 oscP5;
-
-//camera recoding 
-import com.hamoid.*;
 import processing.video.*;
+import com.hamoid.*;
+
+OscP5 oscP5;
 Capture cam;
+Movie myMovie;
+PFont Head;
+PFont subTitle;
+PImage light; //playing signal
+PImage qBtn;//quitGame to Homescreen
+PImage pBtn;//pause
+PImage rBtn;//resetGame
+PImage loopBtn;//loop vid
+PGraphics homeCanvas;
 PGraphics canvas;
+PVector[] meshPoints;
+PVector posePosition,poseOrientation;
+Table infoTable,referTable;
 
 boolean found;
-PVector[] meshPoints;
-float poseScale;
-float posePos_x;
-float posePos_y;
-float poseOrt_x;
-float poseOrt_y;
-float poseOrt_z;
+
+float poseScale,posePos_x,posePos_y,poseOrt_x,poseOrt_y,poseOrt_z;
+float leftEyebrowHeight,rightEyebrowHeight,eyeLeftHeight,eyeRightHeight,mouthWidth,mouthHeight,nostrilHeight;
 //
-PVector posePosition;
-PVector poseOrientation;
-float leftEyebrowHeight;
-float rightEyebrowHeight;
-float eyeLeftHeight;
-float eyeRightHeight;
-float mouthWidth;
-float mouthHeight;
-float nostrilHeight;
-//
-int programFrame;
-int videoFrame;
-int i;
-//info Array
-float[][] info;
-Table infoTable;
+int programFrame,videoFrame,i;
 //reference values
-Table referTable;
 int NKframe;
 float NKBrowL,NKBrowR,NKEyeL,NKEyeR,NKNose,NKMouthH,NKMouthW,NKOriX,NKOriY,NKOriZ;
+boolean play=true,readytoPlay=false,home=true;
+int mouseOver=0;
 
 //settings
-int w = 1280;
-int h = 920;
-int score =0;
-String scoreString="";
+int w = 1440, h = 860, score =0;
+String scoreString="",words="XXXXXXXX";
 //int area =1; //threshold
 void settings(){
   size(w,h,P3D);
@@ -62,8 +53,7 @@ void setup(){
   //cam = new Capture(this,1280,960, "USB Camera");
   cam = new Capture(this, cameras[0]);
   cam.start();
-  
-  
+  setupNewUI();
    //XXXXXXXXXXXXXXXXXX
   //FACEOSC PLUG-INS
   //XXXXXXXXXXXXXXXXXX
@@ -89,6 +79,7 @@ void setup(){
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 void draw(){
+  drawUI();
   if(cam.available() ==true){
      cam.read(); 
    }
@@ -131,31 +122,20 @@ void draw(){
       NKOriZ = row.getFloat("OriZ");
     }
     println("///////////////////////////////CSV : "+NKBrowL +"  WEBCAM : "+leftEyebrowHeight + "  SCORE : "+score);
-    if(NKBrowL-area <leftEyebrowHeight && NKBrowL+area >leftEyebrowHeight){
-      score++;
-    }if (NKBrowR-area<rightEyebrowHeight && NKBrowR+area >rightEyebrowHeight){
-      score++;
-    }if(NKEyeL-area< eyeLeftHeight && NKEyeL+area> eyeLeftHeight){
-      score++;
-    }if(NKEyeR-area< eyeRightHeight && NKEyeR+area >eyeRightHeight ){
-      score++;
-    }if(NKNose-area< nostrilHeight && NKNose+area >nostrilHeight){
-      score++;
-    }if(NKMouthH-area< mouthHeight && NKMouthH+area> mouthHeight){
-      score++;
-    }if (NKMouthW-area< mouthWidth && NKMouthW+area> mouthWidth){
-      score++;
-    }if(NKOriX-area<poseOrt_x && NKOriX+area>poseOrt_x){
-      score++;
-    }if(NKOriY-area<poseOrt_y && NKOriY+area>poseOrt_y){
-      score++;
-    }if(NKOriZ-area<poseOrt_z && NKOriZ+area>poseOrt_z){
-      score++;
-    }
+    if(NKBrowL-area <leftEyebrowHeight && NKBrowL+area >leftEyebrowHeight){score++;}
+    if(NKBrowR-area<rightEyebrowHeight && NKBrowR+area >rightEyebrowHeight){score++;}
+    if(NKEyeL-area< eyeLeftHeight && NKEyeL+area> eyeLeftHeight){score++;}
+    if(NKEyeR-area< eyeRightHeight && NKEyeR+area >eyeRightHeight ){score++;}
+    if(NKNose-area< nostrilHeight && NKNose+area >nostrilHeight){score++;}
+    if(NKMouthH-area< mouthHeight && NKMouthH+area> mouthHeight){score++;}
+    if(NKMouthW-area< mouthWidth && NKMouthW+area> mouthWidth){score++;}
+    if(NKOriX-area<poseOrt_x && NKOriX+area>poseOrt_x){score++;}
+    if(NKOriY-area<poseOrt_y && NKOriY+area>poseOrt_y){score++;}
+    if(NKOriZ-area<poseOrt_z && NKOriZ+area>poseOrt_z){score++;}
     textSize(60);
     text(score+"\n"+scoreString,30,100);
    if(frameCount >=90){
-     Score();
+     result();
      frameCount =0;
      score = 0;
    }
@@ -170,8 +150,6 @@ void draw(){
  //println("FRAMECOUNT : "+frameCount+"    SCORE : "+score);
  saveTable(infoTable, "table.csv");//,"html");
 }
-
-//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 float area =0.2; //threshold
 float ori = 0.01;
@@ -218,7 +196,7 @@ void loadReferTable(){
 
 /*void dataComparsion(Table table){
 }*/
-void Score(){
+void result(){
   if (score < 300){
     //text(score+"You are such a mundane person.",100,150);
     //text();
@@ -240,4 +218,8 @@ void Score(){
     scoreString = "Yeah... you do good. Ready for a celeb life?";
     //text(score+"Yeah... you do good. Ready for a celeb life?",100,150);
   }
+}
+void Score(){
+
+
 }

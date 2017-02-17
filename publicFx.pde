@@ -1,5 +1,5 @@
 //public float info[5];//eye brow(left/right),eyes(left/right),nose,mouth(width/height),roatation)
-
+Boolean plugged;
 public void eyebrowLeftReceived(float h) {
   //println("eyebrow right: " + h);//miror view
   leftEyebrowHeight = h;
@@ -55,6 +55,7 @@ public void nostrilsReceived(float h) {
 }
 
 void oscEvent(OscMessage theOscMessage) {
+  plugged = theOscMessage.isPlugged();
   if (theOscMessage.isPlugged()==false) {
     //println("UNPLUGGED: " + theOscMessage);
     //println("FC when Osc on: "+frameCount);
