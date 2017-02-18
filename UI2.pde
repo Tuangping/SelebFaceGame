@@ -7,7 +7,7 @@ void names() {
   textSize(20);
   text("Nikkie", width/4, 180);
   text("The Next Celeb", width-(width/4), 180);
-  text(words, width/2, height-100);
+  text(scoreString, width/2, height-100);
 }
 
 void gameSet() {
@@ -87,7 +87,7 @@ void mousePressed() {
       }
     }
   } else {
-    if (mouseOver==1) {
+    if (mouseOver==1) { //Nikki
       homeCanvas.beginDraw();
       homeCanvas.clear();
       homeCanvas.endDraw();

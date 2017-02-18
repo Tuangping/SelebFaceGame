@@ -31,8 +31,9 @@ int mouseOver=0;
 
 //settings
 int w = 1440, h = 860, score =0;
-String scoreString="", words="XXXXXXXX";
-//int area =1; //threshold
+public String scoreString="", words="XXXXXXXX";
+float area =0.2; 
+float ori = 0.01;
 void settings() {
   size(w, h, P3D);
 }
@@ -90,7 +91,7 @@ void setup() {
   //saveTable(infoTable, "table.csv");
   //loadReferTable();
   referTable = loadTable("NikkiVideoData.csv", "header");
-  canvas = createGraphics(w, h, P3D);
+  //canvas = createGraphics(w, h, P3D);
   frameRate(30);
 }
 
@@ -157,8 +158,7 @@ void draw() {
   //saveTable(infoTable, "table.csv");//,"html");
 }
 
-float area =0.2; //threshold
-float ori = 0.01;
+
 void loadReferTable() {
   //referTable = loadTable("NikkiVideoData.csv","header");
   //println(referTable.getRowCount() + "total rows in table");
@@ -190,34 +190,18 @@ void loadReferTable() {
 /*void dataComparsion(Table table){
  }*/
 void result() {
-  if (score < 300) {
-    //text(score+"You are such a mundane person.",100,150);
-    //text();
-    scoreString = "You are such a mundane person.";
-  } else if (score>=300 && score<=450) {
-    println(score+"Your acting is ok but still too boring.");
-    //text(score+"Your acting is ok but still too boring.",100,150);
-    scoreString = "Your acting is ok but still too boring.";
-  } else if ( score>450 & score <=650) {
-    println(score+"You are kidda fancy person.");
-    scoreString = "You are kidda fancy person.";
-    //text(score+"You are kidda fancy person.",100,150);
-  } else if ( score>650 & score <=800) {
-    println(score+"Ahrr.. May be you can be a star one day.");
-    scoreString = "Ahrr.. May be you can be a star one day.";
-    //text(score+"Ahrr.. May be you can be a star one day.",100,150);
-  } else if ( score>800 ) {
-    println(score+"Yeah... you do good. Ready for a celeb life?");
-    scoreString = "Yeah... you do good. Ready for a celeb life?";
-    //text(score+"Yeah... you do good. Ready for a celeb life?",100,150);
-  }
+  if (score < 300) {scoreString = "You are such a mundane person.";} 
+  else if (score>=300 && score<=450) {scoreString = "Your acting is ok but still too boring.";} 
+  else if ( score>450 & score <=650) {scoreString = "You are kidda fancy person.";}
+  else if ( score>650 & score <=800) {scoreString = "Ahrr.. May be you can be a star one day.";} 
+  else if ( score>800 ) {scoreString = "Yeah... you do good. Ready for a celeb life?";}
 }
 void setupNewUI() {
   //fullScreen(); //full screen size is 1440x900
   textAlign(CENTER);
   Head = createFont("SanFranciscoDisplay-Bold.otf", 32);
   subTitle = createFont("SanFranciscoDisplay-Regular.otf", 12);
-  canvas = createGraphics(w/2, h/2);
+  canvas = createGraphics(w/2, h/2,P3D);
   homeCanvas = createGraphics(w, h);
   fill(0);
   myMovie = new Movie(this, "../NK8_trim.mp4"); 
@@ -248,11 +232,9 @@ void drawUI() {
     scale(-1, 1); 
     canvas.beginDraw();
     canvas.image(cam, 0, 0, canvas.width, canvas.height);
-    //canvas.image(cam, 0, 0, width/2, height/2);
     canvas.endDraw();
     image(canvas, -canvas.width, 200);
     popMatrix();
-    image(cam, 0, 0, canvas.width, canvas.height);
     names();
     gameSet();
     image(qBtn, 10, 10, 50, 50);
