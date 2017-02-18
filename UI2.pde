@@ -1,6 +1,5 @@
 void setupNewUI(){
   //fullScreen(); //full screen size is 1440x900
-  size(1440, 860);
   textAlign(CENTER);
   Head = createFont("SanFranciscoDisplay-Bold.otf", 32);
   subTitle = createFont("SanFranciscoDisplay-Regular.otf", 12);
