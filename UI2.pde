@@ -1,13 +1,12 @@
 void setupNewUI(){
   //fullScreen(); //full screen size is 1440x900
-  size(1440, 860);
   textAlign(CENTER);
   Head = createFont("SanFranciscoDisplay-Bold.otf", 32);
   subTitle = createFont("SanFranciscoDisplay-Regular.otf", 12);
   canvas = createGraphics(width/2, height/2);
   homeCanvas = createGraphics(width, height);
   fill(0);
-  myMovie = new Movie(this, "/NK8_trim.mp4"); 
+  myMovie = new Movie(this, "../NK8_trim.mp4"); 
   // put after cam.start to get it play at the same time.
   qBtn = loadImage("quitBtn.png");
   rBtn = loadImage("reSetBtn.png");
@@ -24,16 +23,9 @@ void drawUI() {
   if (home) {   
     home();
   } else {
-    if (cam.available() ==true) {
-      cam.read();
-    }  
-  
-    if (myMovie.available()) {
-      myMovie.read();
-     
-    }
+    if (cam.available() ==true) { cam.read();}  
+    if (myMovie.available()) {myMovie.read();}
     image(myMovie, 0, 200, width/2, height/2);
-
     pushMatrix(); 
     translate(canvas.width, 0);
     scale(-1, 1); 
