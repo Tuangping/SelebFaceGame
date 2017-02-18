@@ -34,9 +34,9 @@ int mouseOver=0;
 int w = 1440, h = 860, score =0;
 String scoreString="", words="XXXXXXXX";
 //int area =1; //threshold
-void settings() {
+/*void settings() {
   size(w, h, P3D);
-}
+}*/
 void setup() {
   setupNewUI();
   noStroke();
@@ -131,36 +131,16 @@ void draw() {
       NKOriZ = row.getFloat("OriZ");
     }
     println("///////////////////////////////CSV : "+NKBrowL +"  WEBCAM : "+leftEyebrowHeight + "  SCORE : "+score);
-    if (NKBrowL-area <leftEyebrowHeight && NKBrowL+area >leftEyebrowHeight) {
-      score++;
-    }
-    if (NKBrowR-area<rightEyebrowHeight && NKBrowR+area >rightEyebrowHeight) {
-      score++;
-    }
-    if (NKEyeL-area< eyeLeftHeight && NKEyeL+area> eyeLeftHeight) {
-      score++;
-    }
-    if (NKEyeR-area< eyeRightHeight && NKEyeR+area >eyeRightHeight ) {
-      score++;
-    }
-    if (NKNose-area< nostrilHeight && NKNose+area >nostrilHeight) {
-      score++;
-    }
-    if (NKMouthH-area< mouthHeight && NKMouthH+area> mouthHeight) {
-      score++;
-    }
-    if (NKMouthW-area< mouthWidth && NKMouthW+area> mouthWidth) {
-      score++;
-    }
-    if (NKOriX-area<poseOrt_x && NKOriX+area>poseOrt_x) {
-      score++;
-    }
-    if (NKOriY-area<poseOrt_y && NKOriY+area>poseOrt_y) {
-      score++;
-    }
-    if (NKOriZ-area<poseOrt_z && NKOriZ+area>poseOrt_z) {
-      score++;
-    }
+    if (NKBrowL-area <leftEyebrowHeight && NKBrowL+area >leftEyebrowHeight) {score++;}
+    if (NKBrowR-area<rightEyebrowHeight && NKBrowR+area >rightEyebrowHeight) {score++;}
+    if (NKEyeL-area< eyeLeftHeight && NKEyeL+area> eyeLeftHeight) {score++;}
+    if (NKEyeR-area< eyeRightHeight && NKEyeR+area >eyeRightHeight ) {score++;}
+    if (NKNose-area< nostrilHeight && NKNose+area >nostrilHeight) {score++;}
+    if (NKMouthH-area< mouthHeight && NKMouthH+area> mouthHeight) {score++;}
+    if (NKMouthW-area< mouthWidth && NKMouthW+area> mouthWidth) {score++;}
+    if (NKOriX-area<poseOrt_x && NKOriX+area>poseOrt_x) {score++;}
+    if (NKOriY-area<poseOrt_y && NKOriY+area>poseOrt_y) {score++;}
+    if (NKOriZ-area<poseOrt_z && NKOriZ+area>poseOrt_z) {score++;}
     textSize(60);
     text(score+"\n"+scoreString, 30, 100);
     if (frameCount >=90) {
@@ -229,8 +209,6 @@ void loadReferTable() {
     }
   }
 }
-
-
 /*void dataComparsion(Table table){
  }*/
 void result() {
