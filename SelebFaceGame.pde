@@ -22,7 +22,6 @@ boolean found;
 
 float poseScale, posePos_x, posePos_y, poseOrt_x, poseOrt_y, poseOrt_z;
 float leftEyebrowHeight, rightEyebrowHeight, eyeLeftHeight, eyeRightHeight, mouthWidth, mouthHeight, nostrilHeight;
-//
 int programFrame, videoFrame, i;
 //reference values
 int NKframe;
@@ -34,9 +33,9 @@ int mouseOver=0;
 int w = 1440, h = 860, score =0;
 String scoreString="", words="XXXXXXXX";
 //int area =1; //threshold
-/*void settings() {
+void settings() {
   size(w, h, P3D);
-}*/
+}
 void setup() {
   setupNewUI();
   noStroke();
@@ -54,7 +53,6 @@ void setup() {
   //cam = new Capture(this,1280,960, "USB Camera");
   cam = new Capture(this, cameras[0]);
   cam.start();
-  
   //XXXXXXXXXXXXXXXXXX
   //FACEOSC PLUG-INS
   //XXXXXXXXXXXXXXXXXX
@@ -156,7 +154,7 @@ void draw() {
 
   //println("FC in draw: "+frameCount);
   //println("FRAMECOUNT : "+frameCount+"    SCORE : "+score);
-  saveTable(infoTable, "table.csv");//,"html");
+  //saveTable(infoTable, "table.csv");//,"html");
 }
 
 float area =0.2; //threshold
@@ -177,36 +175,16 @@ void loadReferTable() {
     NKOriY = row.getFloat("OriY");
     NKOriZ = row.getFloat("OriZ");
     println("DATA FROM THE CSV : "+NKOriZ);
-    if (NKBrowL-area <leftEyebrowHeight && NKBrowL+area >leftEyebrowHeight) {
-      score++;
-    }
-    if (NKBrowR-area<rightEyebrowHeight && NKBrowR+area >rightEyebrowHeight) {
-      score++;
-    }
-    if (NKEyeL-area< eyeLeftHeight && NKEyeL+area> eyeLeftHeight) {
-      score++;
-    }
-    if (NKEyeR-area< eyeRightHeight && NKEyeR+area >eyeRightHeight ) {
-      score++;
-    }
-    if (NKNose-area< nostrilHeight && NKNose+area >nostrilHeight) {
-      score++;
-    }
-    if (NKMouthH-area< mouthHeight && NKMouthH+area> mouthHeight) {
-      score++;
-    }
-    if (NKMouthW-area< mouthWidth && NKMouthW+area> mouthWidth) {
-      score++;
-    }
-    if (NKOriX-ori<poseOrt_x && NKOriX+ori>poseOrt_x) {
-      score++;
-    }
-    if (NKOriY-ori<poseOrt_y && NKOriY+ori>poseOrt_y) {
-      score++;
-    }
-    if (NKOriZ-ori<poseOrt_z && NKOriZ+ori>poseOrt_z) {
-      score++;
-    }
+    if (NKBrowL-area <leftEyebrowHeight && NKBrowL+area >leftEyebrowHeight) {score++;}
+    if (NKBrowR-area<rightEyebrowHeight && NKBrowR+area >rightEyebrowHeight) {score++;}
+    if (NKEyeL-area< eyeLeftHeight && NKEyeL+area> eyeLeftHeight) {score++;}
+    if (NKEyeR-area< eyeRightHeight && NKEyeR+area >eyeRightHeight ) {score++;}
+    if (NKNose-area< nostrilHeight && NKNose+area >nostrilHeight) {score++;}
+    if (NKMouthH-area< mouthHeight && NKMouthH+area> mouthHeight) {score++;}
+    if (NKMouthW-area< mouthWidth && NKMouthW+area> mouthWidth) {score++;}
+    if (NKOriX-ori<poseOrt_x && NKOriX+ori>poseOrt_x) {score++;}
+    if (NKOriY-ori<poseOrt_y && NKOriY+ori>poseOrt_y) {score++;}
+    if (NKOriZ-ori<poseOrt_z && NKOriZ+ori>poseOrt_z) {score++;}
   }
 }
 /*void dataComparsion(Table table){
@@ -234,5 +212,52 @@ void result() {
     //text(score+"Yeah... you do good. Ready for a celeb life?",100,150);
   }
 }
-void Score() {
+void setupNewUI() {
+  //fullScreen(); //full screen size is 1440x900
+  textAlign(CENTER);
+  Head = createFont("SanFranciscoDisplay-Bold.otf", 32);
+  subTitle = createFont("SanFranciscoDisplay-Regular.otf", 12);
+  canvas = createGraphics(w/2, h/2);
+  homeCanvas = createGraphics(w, h);
+  fill(0);
+  myMovie = new Movie(this, "../NK8_trim.mp4"); 
+  // put after cam.start to get it play at the same time.
+  qBtn = loadImage("quitBtn.png");
+  rBtn = loadImage("reSetBtn.png");
+  loopBtn = loadImage("loopBtn.png");
+  light = loadImage("redLight.png");
+  js=loadImage("js.jpg");
+  ksi=loadImage("ksi.jpg");
+  nk=loadImage("nk.jpg");
+}
+void drawUI() {
+  //println(width+" "+height);
+  background(255);
+  if (home) {
+    home();
+  } else {
+    if (cam.available() ==true) { 
+      cam.read();
+    }  
+    if (myMovie.available()) {
+      myMovie.read();
+    }
+    image(myMovie, 0, 200, width/2, height/2);
+    pushMatrix(); 
+    translate(canvas.width, 0);
+    scale(-1, 1); 
+    canvas.beginDraw();
+    canvas.image(cam, 0, 0, canvas.width, canvas.height);
+    //canvas.image(cam, 0, 0, width/2, height/2);
+    canvas.endDraw();
+    image(canvas, -canvas.width, 200);
+    popMatrix();
+    image(cam, 0, 0, canvas.width, canvas.height);
+    names();
+    gameSet();
+    image(qBtn, 10, 10, 50, 50);
+    image(rBtn, 20, 570, 50, 50);
+    image(light, width/2+20, 570, 50, 50);
+    image(loopBtn, 80, 570, 50, 50);
+  }
 }
