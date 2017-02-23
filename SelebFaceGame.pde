@@ -240,7 +240,6 @@ void drawUI() {
     home();
   } 
   else if (videoScreen){
-    println("inside videoScreen");
     if (myMovie.available()) {
       myMovie.read();
     }
@@ -253,7 +252,17 @@ void drawUI() {
     image(Btn03, width/2, height-40,50,50);
     image(Btn04,width/2+70, height-40,50,50);
     image(Btn05,width/2+140,height-40,50,50);
-  }
+   if (myMovie.time()==myMovie.duration()){
+     println("Exit videoScreen");
+      Btn03=loadImage("Btn-03.png");
+      myMovie.stop();
+      play=true;
+      myMovie = new Movie(this, "../NK8_trim.mp4"); 
+      myMovie.speed(1);
+      myMovie.play();
+      videoScreen=false;
+   }
+   }
   else {
     if (cam.available() ==true) { 
       cam.read();

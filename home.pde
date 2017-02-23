@@ -1,5 +1,6 @@
 void home() {
   if (home) {
+    println("mouseOver: "+mouseOver);
     homeCanvas.beginDraw();
     homeCanvas.background(255);
     homeCanvas.textAlign(CENTER);
