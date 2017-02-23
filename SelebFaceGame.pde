@@ -17,7 +17,10 @@ PGraphics canvas;
 PVector[] meshPoints;
 PVector posePosition, poseOrientation;
 Table infoTable, referTable;
-
+///
+//videoScreen Buttons
+PImage Btn01,Btn02,Btn03,Btn04,Btn05;
+///
 boolean found;
 
 float poseScale, posePos_x, posePos_y, poseOrt_x, poseOrt_y, poseOrt_z;
@@ -26,8 +29,9 @@ int programFrame, videoFrame, i;
 //reference values
 int NKframe;
 float NKBrowL, NKBrowR, NKEyeL, NKEyeR, NKNose, NKMouthH, NKMouthW, NKOriX, NKOriY, NKOriZ;
-boolean play=true, readytoPlay=false, home=true;
+boolean play=true, readytoPlay=false, home=true, videoScreen=false;
 int mouseOver=0;
+PImage js,ksi,nk,bb,gm,gg,pew,pom,shane,title;
 
 //settings
 int w = 1440, h = 860, score =0;
@@ -204,28 +208,60 @@ void setupNewUI() {
   canvas = createGraphics(w/2, h/2,P3D);
   homeCanvas = createGraphics(w, h);
   fill(0);
-  myMovie = new Movie(this, "../NK8_trim.mp4"); 
+   //myMovie = new Movie(this, "../NK8_trim.mp4"); 
   // put after cam.start to get it play at the same time.
   qBtn = loadImage("quitBtn.png");
   rBtn = loadImage("reSetBtn.png");
   loopBtn = loadImage("loopBtn.png");
   light = loadImage("redLight.png");
-  js=loadImage("js.jpg");
-  ksi=loadImage("ksi.jpg");
-  nk=loadImage("nk.jpg");
+  js=loadImage("thumbnails/JS.jpg");
+  ksi=loadImage("thumbnails/ksi.jpg");
+  nk=loadImage("thumbnails/nk.jpg");
+  bb=loadImage("thumbnails/BB.jpg");
+  gm=loadImage("thumbnails/German.jpg");
+  gg=loadImage("thumbnails/gg.jpg");
+  pew=loadImage("thumbnails/pew.jpg");
+  pom=loadImage("thumbnails/pomz.jpg");
+  shane=loadImage("thumbnails/shane.jpg");
+  title=loadImage("cNNtitle.png");
+  ///
+  //videoScreen buttons
+  Btn01=loadImage("Btn-01.png");
+  Btn02=loadImage("Btn-02.png");
+  Btn03=loadImage("Btn-03.png");
+  Btn04=loadImage("Btn-04.png");
+  Btn05=loadImage("Btn-05.png");
+  
 }
 void drawUI() {
   //println(width+" "+height);
   background(255);
   if (home) {
     home();
-  } else {
+  } 
+  else if (videoScreen){
+    println("inside videoScreen");
+    if (myMovie.available()) {
+      myMovie.read();
+    }
+    imageMode(CENTER);
+    image(myMovie, width/2, height/2);
+    textFont(subTitle);
+    text("First, watch the video and learn how this star's face gesture is.",width/2,45);
+    image(Btn01,width/2-140,height-40,50,50);
+    image(Btn02,width/2-70,height-40,50,50);
+    image(Btn03, width/2, height-40,50,50);
+    image(Btn04,width/2+70, height-40,50,50);
+    image(Btn05,width/2+140,height-40,50,50);
+  }
+  else {
     if (cam.available() ==true) { 
       cam.read();
     }  
     if (myMovie.available()) {
       myMovie.read();
     }
+    imageMode(CORNER);
     image(myMovie, 0, 200, width/2, height/2);
     pushMatrix(); 
     translate(canvas.width, 0);
