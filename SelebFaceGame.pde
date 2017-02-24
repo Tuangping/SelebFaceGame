@@ -29,7 +29,7 @@ int programFrame, videoFrame = 0, i;
 //reference values
 int NKframe;
 float NKBrowL, NKBrowR, NKEyeL, NKEyeR, NKNose, NKMouthH, NKMouthW, NKOriX, NKOriY, NKOriZ;
-boolean play=true, readytoPlay=false, home=true, videoScreen=false, gameMode =false, endOfClip = false, tutorial;
+boolean play=true, readytoPlay=false, home=true, videoScreen=false, gameMode =false, endOfClip = false, tutorial= false;
 int waveCount = 0;
 int mouseOver=0;
 PImage js,ksi,nk,bb,gm,gg,pew,pom,shane,title;
