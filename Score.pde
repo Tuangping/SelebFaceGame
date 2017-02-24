@@ -72,6 +72,20 @@ void loadReferTable() {
 }
 
 void saveReferTable(){
+  infoTable = new Table();
+  infoTable.addColumn("frameCount");
+  infoTable.addColumn("LBrowH");
+  infoTable.addColumn("RBrowH");
+  infoTable.addColumn("LEyeH");
+  infoTable.addColumn("REyeH");
+  infoTable.addColumn("nose");
+  infoTable.addColumn("MouseH");
+  infoTable.addColumn("MouseW");
+  infoTable.addColumn("OriX");
+  infoTable.addColumn("OriY");
+  infoTable.addColumn("OriZ");
+  //saveTable(infoTable, "table.csv");
+  //////////////////these were at setup()///////////////////////// 
   TableRow newRow = infoTable.addRow();
     newRow.setInt("frameCount", frameCount);//infoTable.lastRowIndex());
     newRow.setFloat("LBrowH", Math.round(leftEyebrowHeight*100)/100.0);

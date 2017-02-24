@@ -58,11 +58,21 @@ void setupNewUI() {
   shane=loadImage("thumbnails/shane.jpg");
   title=loadImage("cNNtitle.png");
   ///
-  //videoScreen buttons
+  //charSel buttons
   Btn01=loadImage("Btn-01.png");
   Btn02=loadImage("Btn-02.png");
   Btn03=loadImage("Btn-03.png");
   Btn04=loadImage("Btn-04.png");
   Btn05=loadImage("Btn-05.png");
   
+}
+void scoreBoard() {
+  textFont(Head);
+  textSize(24);
+  text("Facial Famous Points: "+score, width/2, 100);
+  textFont(subTitle);
+  textSize(20);
+  text("Nikkie", width/4, 180);
+  text("The Next Celeb", width-(width/4), 180);
+  text(scoreString, width/2, height-100);
 }

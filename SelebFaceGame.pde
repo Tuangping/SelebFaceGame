@@ -18,7 +18,7 @@ PVector[] meshPoints;
 PVector posePosition, poseOrientation;
 Table infoTable, referTable;
 ///
-//videoScreen Buttons
+//charSel Buttons
 PImage Btn01,Btn02,Btn03,Btn04,Btn05;
 ///
 boolean found;
@@ -29,7 +29,7 @@ int programFrame, videoFrame = 0, i;
 //reference values
 int NKframe;
 float NKBrowL, NKBrowR, NKEyeL, NKEyeR, NKNose, NKMouthH, NKMouthW, NKOriX, NKOriY, NKOriZ;
-boolean play=true, readytoPlay=false, home=true, videoScreen=false, gameMode =false, endOfClip = false, tutorial= false;
+boolean play=true, readytoPlay=false, home=true, charSel=false, gameMode =false, endOfClip = false, tutorial= false;
 int waveCount = 0;
 int mouseOver=0;
 PImage js,ksi,nk,bb,gm,gg,pew,pom,shane,title;
@@ -81,19 +81,6 @@ void setup() {
   oscP5.plug(this, "posePosition", "/pose/position");
   oscP5.plug(this, "poseScale", "/pose/scale");
   oscP5.plug(this, "poseOrientation", "/pose/orientation");
-  infoTable = new Table();
-  infoTable.addColumn("frameCount");
-  infoTable.addColumn("LBrowH");
-  infoTable.addColumn("RBrowH");
-  infoTable.addColumn("LEyeH");
-  infoTable.addColumn("REyeH");
-  infoTable.addColumn("nose");
-  infoTable.addColumn("MouseH");
-  infoTable.addColumn("MouseW");
-  infoTable.addColumn("OriX");
-  infoTable.addColumn("OriY");
-  infoTable.addColumn("OriZ");
-  //saveTable(infoTable, "table.csv");
   //loadReferTable();
   referTable = loadTable("NikkiVideoData.csv", "header");
   //canvas = createGraphics(w, h, P3D);
