@@ -30,22 +30,110 @@ void gameSet() {
 }
 void mousePressed() {
   if (home) {
-    //if (mouseOver==1) {
-    //}
-    //if (mouseOver==2) {
-    //}
-    //if (mouseOver==3) {
-    //} 
-    //if (mouseOver==4) {
-    //} 
-    //if (mouseOver==5) {
-    //} 
-    //if (mouseOver==6) {
-    //} 
-    //if (mouseOver==7) {
-    //} 
-    //if (mouseOver==8) {
-    //} 
+    if (mouseOver==1) {
+      println("mousePressed 1");
+      homeCanvas.beginDraw();
+      homeCanvas.clear();
+      homeCanvas.endDraw();     
+      myMovie = new Movie(this, "../data/vdos/pew_vid.mp4"); 
+      myMovie.speed(1);
+      myMovie.play();
+      mouseOver=0;
+      videoScreen=true;
+      home=false;
+      play=true;
+    }
+    if (mouseOver==2) {
+      println("mousePressed 2");
+      homeCanvas.beginDraw();
+      homeCanvas.clear();
+      homeCanvas.endDraw();     
+      myMovie = new Movie(this, "../data/vdos/ksi_vid2.mp4"); 
+      myMovie.speed(1);
+      myMovie.play();
+      mouseOver=0;
+      videoScreen=true;
+      home=false;
+      play=true;
+    }
+    if (mouseOver==3) {
+      println("mousePressed 3");
+      homeCanvas.beginDraw();
+      homeCanvas.clear();
+      homeCanvas.endDraw();     
+      myMovie = new Movie(this, "../data/vdos/js_vid.mp4"); 
+      myMovie.speed(1);
+      myMovie.play();
+      mouseOver=0;
+      videoScreen=true;
+      home=false;
+      play=true;
+    } 
+    if (mouseOver==4) {
+      println("mousePressed 4");
+      homeCanvas.beginDraw();
+      homeCanvas.clear();
+      homeCanvas.endDraw();     
+      myMovie = new Movie(this, "../data/vdos/German_vid.mp4"); 
+      myMovie.speed(1);
+      myMovie.play();
+      mouseOver=0;
+      videoScreen=true;
+      home=false;
+      play=true;
+    } 
+    if (mouseOver==5) {
+      println("mousePressed 5");
+      homeCanvas.beginDraw();
+      homeCanvas.clear();
+      homeCanvas.endDraw();     
+      myMovie = new Movie(this, "../data/vdos/shane_vid.mp4"); 
+      myMovie.speed(1);
+      myMovie.play();
+      mouseOver=0;
+      videoScreen=true;
+      home=false;
+      play=true;
+    } 
+    if (mouseOver==6) {
+      println("mousePressed 6");
+      homeCanvas.beginDraw();
+      homeCanvas.clear();
+      homeCanvas.endDraw();     
+      myMovie = new Movie(this, "../data/vdos/BB_vid.mp4"); 
+      myMovie.speed(1);
+      myMovie.play();
+      mouseOver=0;
+      videoScreen=true;
+      home=false;
+      play=true;
+    } 
+    if (mouseOver==7) {
+      println("mousePressed 7");
+      homeCanvas.beginDraw();
+      homeCanvas.clear();
+      homeCanvas.endDraw();     
+      myMovie = new Movie(this, "../data/vdos/gigi_vid.mp4"); 
+      myMovie.speed(1);
+      myMovie.play();
+      mouseOver=0;
+      videoScreen=true;
+      home=false;
+      play=true;
+    } 
+    if (mouseOver==8) {
+       println("mousePressed 8");
+      homeCanvas.beginDraw();
+      homeCanvas.clear();
+      homeCanvas.endDraw();     
+      myMovie = new Movie(this, "../data/vdos/pomz_vid.mp4"); 
+      myMovie.speed(1);
+      myMovie.play();
+      mouseOver=0;
+      videoScreen=true;
+      home=false;
+      play=true;
+    } 
     if (mouseOver==9) { //Nikki 
       println("mousePressed 9");
       homeCanvas.beginDraw();

@@ -240,6 +240,7 @@ void drawUI() {
     home();
   } 
   else if (videoScreen){
+     println("CurrentTime: "+myMovie.time()+" Video Time: "+ myMovie.duration());
     if (myMovie.available()) {
       myMovie.read();
     }
@@ -252,8 +253,8 @@ void drawUI() {
     image(Btn03, width/2, height-40,50,50);
     image(Btn04,width/2+70, height-40,50,50);
     image(Btn05,width/2+140,height-40,50,50);
-   if (myMovie.time()==myMovie.duration()){
-     println("Exit videoScreen");
+   if (myMovie.time()>=myMovie.duration()-1){
+      println("Exit videoScreen");
       Btn03=loadImage("Btn-03.png");
       myMovie.stop();
       play=true;
