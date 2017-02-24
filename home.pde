@@ -40,7 +40,8 @@ void home() {
       println("KSI");
     }
     if (mouseX>width/5*3 && mouseX<width/5*4 && mouseY>200 && mouseY<height/5+200) {
-      mouseOver=3;     println("Jeffree");
+      mouseOver=3;     
+      println("Jeffree");
     }
     if (mouseX>width/5 && mouseX<width/5*2 && mouseY>height/5+200 && mouseY<height/5+370) {
       mouseOver=4;    
