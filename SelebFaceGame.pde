@@ -27,7 +27,8 @@ int programFrame, videoFrame = 0, i;
 int NKframe;
 float NKBrowL, NKBrowR, NKEyeL, NKEyeR, NKNose, NKMouthH, NKMouthW, NKOriX, NKOriY, NKOriZ;
 boolean play=true, readytoPlay=false, gameMode =false, endOfClip = false, tutorial= false;
-char MENU = 'H'; //HOME,CHAR,GAME
+char MENU = 'H'; //Home,Char,Game 
+char GAME = 'T'; //Tutorial, Play, Score
 
 int waveCount = 0;
 int mouseOver=0;
@@ -95,7 +96,7 @@ void draw() {
   
   if(gameMode){
     comparison();
-    println("PLAY : " + play);
+    //println("PLAY : " + play);
     //println("videoframe : " + videoFrame + "  Mtime : "+round(myMovie.time()*100)/100.0 + "  MDuration : "+ floor(myMovie.duration()*100)/100.0);
   }
   //exportFiles();///saveStringfile

@@ -21,6 +21,7 @@ void mousePressed() {
         mouseOver=0;
         MENU = 'C';
         play=true;
+        println("print 0 : "+ play);
       }
     break;
     case 'C' :
@@ -29,17 +30,20 @@ void mousePressed() {
             Btn03=loadImage("Btn-06.png");
             myMovie.pause();
             play=false;
+            println("print 1 : "+ play);
           } else {
             Btn03=loadImage("Btn-03.png");
             myMovie.speed(1);
             myMovie.play();
             play=true;
+            println("print 2 : "+ play);
           }
         } else if (mouseX<width/2+165 && mouseX>width/2+105 && mouseY>height-60 && mouseY <height-20) {
           println("Skip");
           Btn03=loadImage("Btn-03.png");
           myMovie.stop();
           play=true;
+          println("print 3 : "+ play);
           myMovie = new Movie(this, "../NK8_trim.mp4"); 
           myMovie.speed(1);
           myMovie.play();
@@ -50,26 +54,38 @@ void mousePressed() {
           imageMode(CORNER);
           myMovie.stop();
           play=true;
+          println("print 4 : "+ play);
           MENU = 'H';
         } else if (mouseX>width/2-90 && mouseX<width/2-45 && mouseY>height-60 && mouseY <height-20) {
           println("CurrentTime: "+myMovie.time());
           myMovie.jump(myMovie.time()-8.0);
           myMovie.play();
           play=true;
+          println("print 5 : "+ play);
         } else if (mouseX<width/2+90 && mouseX>width/2+45 && mouseY>height-60 && mouseY <height-20) {
           println("fastforward");
           myMovie.speed(8.0);
           myMovie.play();
           play=true;
+          println("print 6 : "+ play);
         }
       break;
       case 'G' :
+      switch (GAME){
+        case 'T':
+        break;
+        case 'P':
+        break;
+        case 'S':
+        break;
+      }
         if ((mouseX > width/2+20 && mouseX < width/2+70)&&(mouseY > 570 && mouseY <620 )) {
         println("pause");
         if (play) {
           myMovie.pause();
           myMovie.volume(0);
           play=false;
+          println("print 7 : "+ play);
   
           endOfClip = false;
         } else {
@@ -85,6 +101,7 @@ void mousePressed() {
           myMovie.speed(1);
           myMovie.play();
           play=true;
+          println("print 8 : "+ play);
         }
       }
       if ((mouseX>20&&mouseX<70)&&(mouseY > 570 && mouseY <620)) {//reset
@@ -103,6 +120,7 @@ void mousePressed() {
         myMovie.speed(1);
         myMovie.play();
         play=true;
+        println("print 9 : "+ play);
       }
       if ((mouseX>80&&mouseX<130)&&(mouseY>570&&mouseY<620)) {//loop vid
         myMovie.jump(0);

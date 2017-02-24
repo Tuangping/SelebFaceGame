@@ -23,6 +23,7 @@ void drawUI() {
         Btn03=loadImage("Btn-03.png");
         myMovie.stop();
         play=true;
+        println("print 10 : "+ play);
         myMovie = new Movie(this, "../NK8_trim.mp4"); 
         myMovie.speed(1);
         myMovie.play();
@@ -57,18 +58,26 @@ void drawUI() {
 }
 
 void gameSet() {
+  switch (GAME){
+    case 'T':
+    break;
+    case 'P':
+    break;
+    case 'S':
+    break;
+  }
   if (round(myMovie.time()*100)/100.0 >= floor(myMovie.duration()*100)/100.0) {///////LEFT VIDEO ends
     readytoPlay=true;
     videoFrame = 0;
     gameMode = true;
-    println("GameMode 6 : " + gameMode);
+    //println("GameMode 6 : " + gameMode);
     endOfClip = true;
-    println("gameEnds");
+    //println("gameEnds");
   }if (readytoPlay) {
     if (play) {
       light = loadImage("greenLight.png");
       gameMode = true;
-      println("GameMode 7 : " + gameMode);
+      //println("GameMode 7 : " + gameMode);
     } else {
       light = loadImage("pauseBtn.png");
     }
@@ -76,7 +85,7 @@ void gameSet() {
     if (play) {
       light = loadImage("redLight.png");
       gameMode = false;
-      println("GameMode 8 : " + gameMode);
+      //println("GameMode 8 : " + gameMode);
     } else {
       light = loadImage("pauseBtn.png");
     }
