@@ -16,20 +16,19 @@ PGraphics homeCanvas;
 PGraphics canvas;
 PVector[] meshPoints;
 PVector posePosition, poseOrientation;
+boolean found; //FaceOSC
 Table infoTable, referTable;
+PImage Btn01,Btn02,Btn03,Btn04,Btn05;//charSel Buttons
 ///
-//charSel Buttons
-PImage Btn01,Btn02,Btn03,Btn04,Btn05;
-///
-boolean found;
-
 float poseScale, posePos_x, posePos_y, poseOrt_x, poseOrt_y, poseOrt_z;
 float leftEyebrowHeight, rightEyebrowHeight, eyeLeftHeight, eyeRightHeight, mouthWidth, mouthHeight, nostrilHeight;
 int programFrame, videoFrame = 0, i;
 //reference values
 int NKframe;
 float NKBrowL, NKBrowR, NKEyeL, NKEyeR, NKNose, NKMouthH, NKMouthW, NKOriX, NKOriY, NKOriZ;
-boolean play=true, readytoPlay=false, home=true, charSel=false, gameMode =false, endOfClip = false, tutorial= false;
+boolean play=true, readytoPlay=false, gameMode =false, endOfClip = false, tutorial= false;
+char MENU = 'H'; //HOME,CHAR,GAME
+
 int waveCount = 0;
 int mouseOver=0;
 PImage js,ksi,nk,bb,gm,gg,pew,pom,shane,title;
@@ -96,6 +95,7 @@ void draw() {
   
   if(gameMode){
     comparison();
+    println("PLAY : " + play);
     //println("videoframe : " + videoFrame + "  Mtime : "+round(myMovie.time()*100)/100.0 + "  MDuration : "+ floor(myMovie.duration()*100)/100.0);
   }
   //exportFiles();///saveStringfile

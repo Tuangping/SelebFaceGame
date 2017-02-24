@@ -1,122 +1,123 @@
 void mousePressed() {
-  if (home) {////////////////////////////////////////HOMEPAGE////////////////////////////////////////////
-    if (mouseOver!=0) {
-      switch (mouseOver) {
-      case 1 :  videoAddress = "../data/vdos/pew_vid.mp4";  break;
-      case 2 :  videoAddress = "../data/vdos/ksi_vid2.mp4"; break;
-      case 3 :  videoAddress = "../data/vdos/js_vid.mp4";   break;
-      case 4 :  videoAddress = "../data/vdos/German_vid.mp4";break;
-      case 5 :  videoAddress = "../data/vdos/shane_vid.mp4";break;
-      case 6 :  videoAddress = "../data/vdos/BB_vid.mp4";   break;
-      case 7 :  videoAddress = "../data/vdos/gigi_vid.mp4"; break;
-      case 8 :  videoAddress = "../data/vdos/pomz_vid.mp4"; break;
-      case 9 :  videoAddress = "../data/vdos/NK_vid.mp4";   break;}
-      homeCanvas.beginDraw();
-      homeCanvas.clear();
-      homeCanvas.endDraw();     
-      myMovie = new Movie(this, videoAddress); 
-      myMovie.speed(1);
-      myMovie.play();
-      mouseOver=0;
-      charSel=true;
-      home=false;
-      play=true;
-    }
-  } else if (charSel) {
-    //video control buttons
-    if (mouseX>width/2-20 && mouseX<width/2+20 && mouseY>height-60 && mouseY <height-20) {
-      if (play) {
-        Btn03=loadImage("Btn-06.png");
-        myMovie.pause();
-        play=false;
-      } else {
-        Btn03=loadImage("Btn-03.png");
+  switch (MENU){
+    case 'H' :
+      if (mouseOver!=0) {
+        switch (mouseOver) {
+        case 1 :  videoAddress = "../data/vdos/pew_vid.mp4";  break;
+        case 2 :  videoAddress = "../data/vdos/ksi_vid2.mp4"; break;
+        case 3 :  videoAddress = "../data/vdos/js_vid.mp4";   break;
+        case 4 :  videoAddress = "../data/vdos/German_vid.mp4";break;
+        case 5 :  videoAddress = "../data/vdos/shane_vid.mp4";break;
+        case 6 :  videoAddress = "../data/vdos/BB_vid.mp4";   break;
+        case 7 :  videoAddress = "../data/vdos/gigi_vid.mp4"; break;
+        case 8 :  videoAddress = "../data/vdos/pomz_vid.mp4"; break;
+        case 9 :  videoAddress = "../data/vdos/NK_vid.mp4";   break;}
+        homeCanvas.beginDraw();
+        homeCanvas.clear();
+        homeCanvas.endDraw();     
+        myMovie = new Movie(this, videoAddress); 
         myMovie.speed(1);
         myMovie.play();
+        mouseOver=0;
+        MENU = 'C';
         play=true;
       }
-    } else if (mouseX<width/2+165 && mouseX>width/2+105 && mouseY>height-60 && mouseY <height-20) {
-      println("Skip");
-      Btn03=loadImage("Btn-03.png");
-      myMovie.stop();
-      play=true;
-      myMovie = new Movie(this, "../NK8_trim.mp4"); 
-      myMovie.speed(1);
-      myMovie.play();
-      charSel=false;
-    } else if (mouseX>width/2-155 && mouseX<width/2-115 && mouseY>height-60 && mouseY <height-20) {
-      println("Exit");
-      Btn03=loadImage("Btn-03.png");
-      imageMode(CORNER);
-      myMovie.stop();
-      play=true;
-      charSel=false;
-      home=true;
-    } else if (mouseX>width/2-90 && mouseX<width/2-45 && mouseY>height-60 && mouseY <height-20) {
-      println("CurrentTime: "+myMovie.time());
-      myMovie.jump(myMovie.time()-8.0);
-      myMovie.play();
-      play=true;
-    } else if (mouseX<width/2+90 && mouseX>width/2+45 && mouseY>height-60 && mouseY <height-20) {
-      println("fastforward");
-      myMovie.speed(8.0);
-      myMovie.play();
-      play=true;
-    }
-  } else {// Game Mode
-    if ((mouseX > width/2+20 && mouseX < width/2+70)&&(mouseY > 570 && mouseY <620 )) {
-      println("pause");
-      if (play) {
-        myMovie.pause();
-        myMovie.volume(0);
-        play=false;
-
-        endOfClip = false;
-      } else {
+    break;
+    case 'C' :
+      if (mouseX>width/2-20 && mouseX<width/2+20 && mouseY>height-60 && mouseY <height-20) {
+          if (play) {
+            Btn03=loadImage("Btn-06.png");
+            myMovie.pause();
+            play=false;
+          } else {
+            Btn03=loadImage("Btn-03.png");
+            myMovie.speed(1);
+            myMovie.play();
+            play=true;
+          }
+        } else if (mouseX<width/2+165 && mouseX>width/2+105 && mouseY>height-60 && mouseY <height-20) {
+          println("Skip");
+          Btn03=loadImage("Btn-03.png");
+          myMovie.stop();
+          play=true;
+          myMovie = new Movie(this, "../NK8_trim.mp4"); 
+          myMovie.speed(1);
+          myMovie.play();
+          MENU = 'G';
+        } else if (mouseX>width/2-155 && mouseX<width/2-115 && mouseY>height-60 && mouseY <height-20) {
+          println("Exit");
+          Btn03=loadImage("Btn-03.png");
+          imageMode(CORNER);
+          myMovie.stop();
+          play=true;
+          MENU = 'H';
+        } else if (mouseX>width/2-90 && mouseX<width/2-45 && mouseY>height-60 && mouseY <height-20) {
+          println("CurrentTime: "+myMovie.time());
+          myMovie.jump(myMovie.time()-8.0);
+          myMovie.play();
+          play=true;
+        } else if (mouseX<width/2+90 && mouseX>width/2+45 && mouseY>height-60 && mouseY <height-20) {
+          println("fastforward");
+          myMovie.speed(8.0);
+          myMovie.play();
+          play=true;
+        }
+      break;
+      case 'G' :
+        if ((mouseX > width/2+20 && mouseX < width/2+70)&&(mouseY > 570 && mouseY <620 )) {
+        println("pause");
+        if (play) {
+          myMovie.pause();
+          myMovie.volume(0);
+          play=false;
+  
+          endOfClip = false;
+        } else {
+          if (!readytoPlay) {
+            light = loadImage("redLight.png");
+            gameMode = false;
+            println("GameMode 1 : " + gameMode);
+          } else {
+            light = loadImage("greenLight.png");
+            gameMode = true;
+            println("GameMode 2 : " + gameMode);
+          }
+          myMovie.speed(1);
+          myMovie.play();
+          play=true;
+        }
+      }
+      if ((mouseX>20&&mouseX<70)&&(mouseY > 570 && mouseY <620)) {//reset
+        println("reset");
+        myMovie.jump(0);
         if (!readytoPlay) {
           light = loadImage("redLight.png");
           gameMode = false;
-          println("GameMode 1 : " + gameMode);
+          println("GameMode 3 : " + gameMode);
         } else {
           light = loadImage("greenLight.png");
           gameMode = true;
-          println("GameMode 2 : " + gameMode);
-        }
+          println("GameMode 4 : " + gameMode);
+        } 
+        myMovie.noLoop();
         myMovie.speed(1);
         myMovie.play();
         play=true;
       }
-    }
-    if ((mouseX>20&&mouseX<70)&&(mouseY > 570 && mouseY <620)) {//reset
-      println("reset");
-      myMovie.jump(0);
-      if (!readytoPlay) {
-        light = loadImage("redLight.png");
-        gameMode = false;
-        println("GameMode 3 : " + gameMode);
-      } else {
-        light = loadImage("greenLight.png");
-        gameMode = true;
-        println("GameMode 4 : " + gameMode);
-      } 
-      myMovie.noLoop();
-      myMovie.speed(1);
-      myMovie.play();
-      play=true;
-    }
-    if ((mouseX>80&&mouseX<130)&&(mouseY>570&&mouseY<620)) {//loop vid
-      myMovie.jump(0);
-      myMovie.loop();
-    }
-    if ((mouseX>10&&mouseX<60)&&(mouseY>10&&mouseY<70)) {//exit
-      println("exit");
-      home=true;
-      myMovie.stop();
-      canvas.beginDraw();
-      canvas.clear();
-      canvas.endDraw();
-      readytoPlay=false;
-    }
+      if ((mouseX>80&&mouseX<130)&&(mouseY>570&&mouseY<620)) {//loop vid
+        myMovie.jump(0);
+        myMovie.loop();
+      }
+      if ((mouseX>10&&mouseX<60)&&(mouseY>10&&mouseY<70)) {//exit
+        println("exit");
+        MENU = 'H';
+        myMovie.stop();
+        canvas.beginDraw();
+        canvas.clear();
+        canvas.endDraw();
+        readytoPlay=false;
+      }
+    break;
   }
 }
 void home() {
