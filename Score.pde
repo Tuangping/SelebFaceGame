@@ -1,3 +1,5 @@
+float area =0.2; 
+float ori = 0.01;
 void comparison(){
   if (eyeLeftHeight != 0.0&& plugged) {
     //reportFrame();
@@ -16,15 +18,15 @@ void comparison(){
       NKOriY = row.getFloat("OriY");
       NKOriZ = row.getFloat("OriZ");
     }
-    //scoreStringChange();
+    //scoring();
     if (endOfClip) { //frameCount >=90
-      //scoreStringChange();
+      //scoring();
       //frameCount =0;
       score = 0;
       println("show the SCORE HERE");
       endOfClip = false;
     }else{
-      scoreStringChange();
+      scoring();
     }
   } else {
     frameCount =0;
@@ -32,18 +34,20 @@ void comparison(){
   }
 }
 
-void scoreStringChange() {
-  println("///////////////////////////////FRAME : " + NKframe+ "  CSV : "+NKBrowL +"  WEBCAM : "+leftEyebrowHeight + "  SCORE : "+score);
-  if (NKBrowL-area <leftEyebrowHeight && NKBrowL+area >leftEyebrowHeight) {score++;}
-  if (NKBrowR-area<rightEyebrowHeight && NKBrowR+area >rightEyebrowHeight) {score++;}
-  if (NKEyeL-area< eyeLeftHeight && NKEyeL+area> eyeLeftHeight) {score++;}
-  if (NKEyeR-area< eyeRightHeight && NKEyeR+area >eyeRightHeight ) {score++;}
+void scoring() {
+  println("FRAME : " + NKframe+ "  CSV : "+NKOriZ +
+  "  left : "+poseOrt_z*-1 + //"  right : "+rightEyebrowHeight +
+  "  SCORE : "+score);
+  if (NKBrowL-area <rightEyebrowHeight && NKBrowL+area >rightEyebrowHeight) {score++;}
+  if (NKBrowR-area<leftEyebrowHeight && NKBrowR+area >leftEyebrowHeight) {score++;}
+  if (NKEyeL-area< eyeRightHeight && NKEyeL+area> eyeRightHeight) {score++;}
+  if (NKEyeR-area< eyeLeftHeight && NKEyeR+area >eyeLeftHeight ) {score++;}
   if (NKNose-area< nostrilHeight && NKNose+area >nostrilHeight) {score++;}
   if (NKMouthH-area< mouthHeight && NKMouthH+area> mouthHeight) {score++;}
   if (NKMouthW-area< mouthWidth && NKMouthW+area> mouthWidth) {score++;}
-  if (NKOriX-area<poseOrt_x && NKOriX+area>poseOrt_x) {score++;}
-  if (NKOriY-area<poseOrt_y && NKOriY+area>poseOrt_y) {score++;}
-  if (NKOriZ-area<poseOrt_z && NKOriZ+area>poseOrt_z) {score++;}
+  if (NKOriX-ori<poseOrt_x && NKOriX+ori>poseOrt_x) {score++;}
+  if (NKOriY-ori<poseOrt_y && NKOriY+ori>poseOrt_y) {score++;}
+  if (NKOriZ-ori<poseOrt_z*-1 && NKOriZ+ori>poseOrt_z*-1) {score++;}
   
   if (score < 400) {scoreString = "You are such a mundane person.";} 
   else if (score>=500 && score<=500) {scoreString = "Your acting is ok but still too boring.";} 

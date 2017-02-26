@@ -37,8 +37,7 @@ PImage js,ksi,nk,bb,gm,gg,pew,pom,shane,title;
 //settings
 int score = 0, w =700, h=600; //w = 1440, h = 860, score =0;
 String scoreString="", videoAddress = "";
-float area =0.2; 
-float ori = 0.01;
+
 void settings() {
   size(w, h, P3D);
 }

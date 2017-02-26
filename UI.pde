@@ -75,7 +75,7 @@ void gameSet() {
     case 'P': //Play : clip plays again and player have to mimic the clip
       light = loadImage("greenLight.png");
       text("PLAY",width/2,200);
-      println("Mtime : "+round(myMovie.time()*100)/100.0 + "  MDuration : "+ floor(myMovie.duration()*100)/100.0);
+      
       if(playtime){ //play video only for one time
         playtime=false;
         //textSize(100);
@@ -96,6 +96,7 @@ void gameSet() {
       if (round(myMovie.time()*100)/100.0 >= floor(myMovie.duration()*100)/100.0) {// WHEN CLIP ends 
         GAME = 'S';
         endOfClip = true;
+        playtime=true;
         //println("gameEnds");
       }
     break;

@@ -105,6 +105,8 @@ void mousePressed() {
         canvas.clear();
         canvas.endDraw();
         readytoPlay=false;
+        playtime=false;
+        GAME = 'T';
       }
     break;
   }
