@@ -20,8 +20,6 @@ void mousePressed() {
         myMovie.play();
         mouseOver=0;
         MENU = 'C';
-        play=true;
-        println("print 0 : "+ play);
       }
     break;
     case 'C' :
@@ -30,20 +28,17 @@ void mousePressed() {
             Btn03=loadImage("Btn-06.png");
             myMovie.pause();
             play=false;
-            println("print 1 : "+ play);
           } else {
             Btn03=loadImage("Btn-03.png");
             myMovie.speed(1);
             myMovie.play();
             play=true;
-            println("print 2 : "+ play);
           }
         } else if (mouseX<width/2+165 && mouseX>width/2+105 && mouseY>height-60 && mouseY <height-20) {
           println("Skip");
           Btn03=loadImage("Btn-03.png");
           myMovie.stop();
           play=true;
-          println("print 3 : "+ play);
           myMovie = new Movie(this, "../NK8_trim.mp4"); 
           myMovie.speed(1);
           myMovie.play();
@@ -54,54 +49,35 @@ void mousePressed() {
           imageMode(CORNER);
           myMovie.stop();
           play=true;
-          println("print 4 : "+ play);
           MENU = 'H';
         } else if (mouseX>width/2-90 && mouseX<width/2-45 && mouseY>height-60 && mouseY <height-20) {
           println("CurrentTime: "+myMovie.time());
           myMovie.jump(myMovie.time()-8.0);
           myMovie.play();
           play=true;
-          println("print 5 : "+ play);
         } else if (mouseX<width/2+90 && mouseX>width/2+45 && mouseY>height-60 && mouseY <height-20) {
           println("fastforward");
           myMovie.speed(8.0);
           myMovie.play();
           play=true;
-          println("print 6 : "+ play);
         }
       break;
       case 'G' :
-      switch (GAME){
-        case 'T':
-        break;
-        case 'P':
-        break;
-        case 'S':
-        break;
-      }
-        if ((mouseX > width/2+20 && mouseX < width/2+70)&&(mouseY > 570 && mouseY <620 )) {
+        if ((mouseX > width/2+20 && mouseX < width/2+70)&&(mouseY > 570 && mouseY <620 )) { //GREEN/RED/PAUSE button
         println("pause");
-        if (play) {
+        if (play) { //Clip was playing
           myMovie.pause();
           myMovie.volume(0);
           play=false;
-          println("print 7 : "+ play);
-  
-          endOfClip = false;
-        } else {
-          if (!readytoPlay) {
+        } else { //clip wasn't playing
+          if (!readytoPlay) { //don't look like meaningful lines
             light = loadImage("redLight.png");
-            gameMode = false;
-            println("GameMode 1 : " + gameMode);
           } else {
             light = loadImage("greenLight.png");
-            gameMode = true;
-            println("GameMode 2 : " + gameMode);
           }
           myMovie.speed(1);
           myMovie.play();
           play=true;
-          println("print 8 : "+ play);
         }
       }
       if ((mouseX>20&&mouseX<70)&&(mouseY > 570 && mouseY <620)) {//reset
@@ -109,18 +85,13 @@ void mousePressed() {
         myMovie.jump(0);
         if (!readytoPlay) {
           light = loadImage("redLight.png");
-          gameMode = false;
-          println("GameMode 3 : " + gameMode);
         } else {
           light = loadImage("greenLight.png");
-          gameMode = true;
-          println("GameMode 4 : " + gameMode);
         } 
         myMovie.noLoop();
         myMovie.speed(1);
         myMovie.play();
         play=true;
-        println("print 9 : "+ play);
       }
       if ((mouseX>80&&mouseX<130)&&(mouseY>570&&mouseY<620)) {//loop vid
         myMovie.jump(0);

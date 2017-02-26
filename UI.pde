@@ -23,7 +23,7 @@ void drawUI() {
         Btn03=loadImage("Btn-03.png");
         myMovie.stop();
         play=true;
-        println("print 10 : "+ play);
+        //println("print 10 : "+ play);
         myMovie = new Movie(this, "../NK8_trim.mp4"); 
         myMovie.speed(1);
         myMovie.play();
@@ -59,35 +59,49 @@ void drawUI() {
 
 void gameSet() {
   switch (GAME){
-    case 'T':
+    case 'T': //tutorial: show video once! and 3, 2, 1
+      text("Tutorial",width/2,200);
+      light = loadImage("redLight.png");
+       if (round(myMovie.time()*100)/100.0 >= floor(myMovie.duration()*100)/100.0) {// WHEN CLIP ends 
+          GAME = 'P';
+          videoFrame = 0;
+          endOfClip = true;
+          //println("gameEnds");
+          myMovie.stop();
+          myMovie.jump(0);
+          playtime = true;
+        }
     break;
-    case 'P':
+    case 'P': //Play : clip plays again and player have to mimic the clip
+      light = loadImage("greenLight.png");
+      text("PLAY",width/2,200);
+      println("Mtime : "+round(myMovie.time()*100)/100.0 + "  MDuration : "+ floor(myMovie.duration()*100)/100.0);
+      if(playtime){ //play video only for one time
+        playtime=false;
+        //textSize(100);
+        //fill(255);
+        //text(3,width/2,500);
+        println("333333333333333");
+        delay(1000);
+        //text(2,width/2,500);
+        println("2222222222222222");
+        delay(1000);
+        //text(1,width/2,500);
+        println("11111111111111111");
+        delay(1000);
+        videoFrame = 0;
+        myMovie.volume(0); 
+        myMovie.play();
+      }
+      if (round(myMovie.time()*100)/100.0 >= floor(myMovie.duration()*100)/100.0) {// WHEN CLIP ends 
+        GAME = 'S';
+        endOfClip = true;
+        //println("gameEnds");
+      }
     break;
     case 'S':
-    break;
-  }
-  if (round(myMovie.time()*100)/100.0 >= floor(myMovie.duration()*100)/100.0) {///////LEFT VIDEO ends
-    readytoPlay=true;
-    videoFrame = 0;
-    gameMode = true;
-    //println("GameMode 6 : " + gameMode);
-    endOfClip = true;
-    //println("gameEnds");
-  }if (readytoPlay) {
-    if (play) {
-      light = loadImage("greenLight.png");
-      gameMode = true;
-      //println("GameMode 7 : " + gameMode);
-    } else {
-      light = loadImage("pauseBtn.png");
-    }
-  } else {
-    if (play) {
+      text("SCORE",width/2,200);
       light = loadImage("redLight.png");
-      gameMode = false;
-      //println("GameMode 8 : " + gameMode);
-    } else {
-      light = loadImage("pauseBtn.png");
-    }
+    break;
   }
 }

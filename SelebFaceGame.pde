@@ -26,7 +26,7 @@ int programFrame, videoFrame = 0, i;
 //reference values
 int NKframe;
 float NKBrowL, NKBrowR, NKEyeL, NKEyeR, NKNose, NKMouthH, NKMouthW, NKOriX, NKOriY, NKOriZ;
-boolean play=true, readytoPlay=false, gameMode =false, endOfClip = false, tutorial= false;
+boolean play=true, readytoPlay=false, gameMode =false, endOfClip = false, playtime= false;
 char MENU = 'H'; //Home,Char,Game 
 char GAME = 'T'; //Tutorial, Play, Score
 
@@ -35,7 +35,7 @@ int mouseOver=0;
 PImage js,ksi,nk,bb,gm,gg,pew,pom,shane,title;
 
 //settings
-int w = 1440, h = 860, score =0;
+int score = 0, w =700, h=600; //w = 1440, h = 860, score =0;
 String scoreString="", videoAddress = "";
 float area =0.2; 
 float ori = 0.01;
@@ -93,8 +93,8 @@ void draw() {
   drawUI();
   //loadReferTable();
   //frameCount = programFrame;
-  
-  if(gameMode){
+  //print ("MENU : " + MENU + "  GAME :" +GAME +"\n");
+  if(GAME == 'P'){
     comparison();
     //println("PLAY : " + play);
     //println("videoframe : " + videoFrame + "  Mtime : "+round(myMovie.time()*100)/100.0 + "  MDuration : "+ floor(myMovie.duration()*100)/100.0);
